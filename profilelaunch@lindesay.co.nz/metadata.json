@@ -1,0 +1,10 @@
+{
+    "name" : "Profile Launch",
+    "description" : "An extension that allows for various desktop applications to be launched with one of the application's profiles",
+    "shell-version" : [
+        "3.36"
+    ],
+    "url" : "",
+    "uuid" : "profilelaunch@lindesay.co.nz",
+    "version" : 1.0
+}
