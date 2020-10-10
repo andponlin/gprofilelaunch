@@ -8,7 +8,7 @@ The extension only works in the Gnome Shell environment.  An example of this is 
 
 ## License
 
-Please see the [LICENSE.TXT] file distributed with this software.
+Please see the [LICENSE.TXT](LICENSE.TXT) file distributed with this software.
 
 ## Purpose
 
