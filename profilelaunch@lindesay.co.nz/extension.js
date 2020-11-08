@@ -15,13 +15,14 @@ const PopupMenu = imports.ui.popupMenu;
 const Main = imports.ui.main;
 
 const Me = imports.misc.extensionUtils.getCurrentExtension();
-const Firefox = Me.imports.firefox;
+const Mozilla = Me.imports.mozilla;
 const Chrome = Me.imports.chrome;
 const Terminal = Me.imports.terminal;
 
 const PANEL_BUTTON_CODE = 'profilelaunch';
 
 const APP_ID_FIREFOX = 'firefox.desktop';
+const APP_ID_THUNDERBIRD = 'thunderbird.desktop';
 const APP_ID_GOOGLE_CHROME = 'google-chrome.desktop';
 const APP_ID_GNOME_TERMINAL = 'org.gnome.Terminal.desktop';
 
@@ -47,11 +48,11 @@ function createPanelButton() {
         return item;
     }
 
-    function setupForFirefox(desktopAppInfo) {
-        Firefox.deriveProfileNames().forEach(profileName => {
+    function setupForMozilla(desktopAppInfo) {
+        Mozilla.deriveProfileNames(desktopAppInfo).forEach(profileName => {
             let popupMenuItem = createPopupMenuItem(desktopAppInfo, profileName);
             popupMenuItem.connect('activate', function() {
-                Firefox.launchWithProfile(desktopAppInfo, profileName);
+                Mozilla.launchWithProfile(desktopAppInfo, profileName);
             });
             panelButton.menu.addMenuItem(popupMenuItem);
         });
@@ -87,7 +88,13 @@ function createPanelButton() {
 
     panelButton.add_actor(panelButtonIcon);
 
-    maybeSetupForApplication(APP_ID_FIREFOX, setupForFirefox);
+    maybeSetupForApplication(APP_ID_FIREFOX, setupForMozilla);
+
+    if (!panelButton.menu.isEmpty()) {
+        panelButton.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+    }
+
+    maybeSetupForApplication(APP_ID_THUNDERBIRD, setupForMozilla);
 
     if (!panelButton.menu.isEmpty()) {
         panelButton.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());

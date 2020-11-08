@@ -7,10 +7,10 @@
  */
 
 /**
- * This logic deals with identifying Firefox profiles as well as starting Firefox
- * with a specific profile.  Firefox maintains a list of profiles in an `.ini`
- * file in the home directory.  This `.ini` file is parsed and the profiles are
- * derived from this.
+ * This logic deals with identifying Firefox/Thunderbird profiles as well
+ * as starting Firefox/Thunderbird with a specific profile.  Firefox/Thunderbird
+ * maintains a list of profiles in an `.ini` file in the home directory.  This
+ * `.ini` file is parsed and the profiles are derived from this.
  */
 
 const GLib = imports.gi.GLib;
@@ -29,7 +29,7 @@ function launchWithProfile(desktopAppInfo, profileName) {
     Util.spawn([desktopAppInfo.get_executable(), '-P', profileName]);
 }
 
-function deriveProfileNames() {
+function deriveProfileNames(desktopAppInfo) {
 
     function parseIniFile(filename) {
 
@@ -102,6 +102,18 @@ function deriveProfileNames() {
     }
 
     function getProfilesIniSections() {
+
+        function getProfilesFile(appId) {
+            switch (appId) {
+                case 'firefox.desktop':
+                    return GLib.build_filenamev([homeDir, '.mozilla', 'firefox', 'profiles.ini']);
+                case 'thunderbird.desktop':
+                    return GLib.build_filenamev([homeDir, '.thunderbird', 'profiles.ini']);
+                default:
+                    throw Error('unknown mozilla application [' + appId + ']');
+            }
+        }
+
         let homeDir = GLib.get_home_dir();
 
         if (!homeDir) {
@@ -109,7 +121,7 @@ function deriveProfileNames() {
             return [];
         }
 
-        let profilesFile = GLib.build_filenamev([homeDir, '.mozilla', 'firefox', 'profiles.ini']);
+        let profilesFile = getProfilesFile(desktopAppInfo.get_id());
 
         if (!profilesFile) {
             log('the profiles file [' + profilesFile + '] was not able to be formulated');
