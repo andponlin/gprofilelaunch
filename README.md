@@ -26,7 +26,12 @@ The plugin directory `profilelaunch@lindesay.co.nz` should be copied to the dire
 
 ## Usage
 
-The extension currently works with the [Firefox](https://www.mozilla.org/en-US/firefox), [Google Chrome](https://www.google.com/chrome/) and [Gnome Terminal](https://wiki.gnome.org/Apps/Terminal) applications.
+The extension currently works with the following applications;
+
+* [Firefox](https://www.mozilla.org/en-US/firefox)
+* [Thunderbird](https://www.thunderbird.net/en-US/)
+* [Google Chrome](https://www.google.com/chrome/)
+* [Gnome Terminal](https://wiki.gnome.org/Apps/Terminal)
 
 ### Firefox
 
