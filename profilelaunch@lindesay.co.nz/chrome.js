@@ -1,5 +1,5 @@
 /*
- * Copyright 2020, Andrew Lindesay. All Rights Reserved.
+ * Copyright 2020-2022, Andrew Lindesay. All Rights Reserved.
  * Distributed under the terms of the MIT License.
  *
  * Authors:
@@ -76,7 +76,7 @@ function deriveUserDataDirectories() {
         else {
             log('there are no chrome user data dirs configured');
         }
-        return (val || '').split(';')
+        return (val || '').split(':')
             .filter(path => path)
             .map(path => new UserDataDirectory(deriveName(path), path))
     }
